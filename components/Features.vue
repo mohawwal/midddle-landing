@@ -14,7 +14,7 @@
               <div
                 v-for="feature in features"
                 :key="feature.id"
-                class="bg-[#1D302C] rounded-[22px] md:rounded-[28px] p-6 md:p-10 transition-all duration-500 cursor-pointer flex flex-col md:flex-row gap-6 md:gap-0 justify-between items-start md:items-center group shadow-[0_8px_24px_rgba(0,0,0,0.35)] md:absolute md:inset-x-0 md:mx-auto md:h-[290px] hover:-translate-y-4 md:hover:-translate-y-16 hover:scale-[1.02] md:hover:scale-105 hover:z-[999] hover:shadow-[0_20px_60px_rgba(0,0,0,0.5)]"
+                class="bg-[#1D302C] rounded-[22px] md:rounded-[28px] p-6 md:p-8 transition-all duration-500 cursor-pointer flex flex-col md:flex-row gap-6 md:gap-0 justify-between items-start md:items-center group shadow-[0_8px_24px_rgba(0,0,0,0.35)] md:absolute md:inset-x-0 md:mx-auto md:h-[250px] hover:-translate-y-4 md:hover:-translate-y-16  hover:z-[999] hover:shadow-[0_20px_60px_rgba(0,0,0,0.5)]"
                 :class="[
                   feature.widthClass,
                   feature.shadowClass,
@@ -24,7 +24,7 @@
               >
                 <div class="max-w-md">
                   <h3
-                    class="text-xl md:text-[26px] font-bold text-[#C3FF4C] tracking-tight"
+                    class="text-[26px] md:text-[26px] font-bold text-[#C3FF4C] tracking-tight"
                   >
                     {{ feature.title }}
                   </h3>
