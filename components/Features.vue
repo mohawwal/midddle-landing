@@ -9,17 +9,19 @@
         >
           <div
             class="relative w-full max-w-2xl flex flex-col gap-4 lg:block lg:h-[500px] xl:h-[600px]"
-            @mouseenter="startCycling"
-            @mouseleave="stopCycling"
+            @mouseenter="stopCycling"
+            @mouseleave="handleContainerLeave"
           >
             <div
               v-for="(card, index) in cards"
               :key="index"
-              class="mx-auto w-full max-w-[648px] cursor-pointer relative lg:absolute lg:left-0 lg:right-0"
-              :style="getCardStyle(index)"
+              class="mx-auto w-full max-w-[648px] relative lg:absolute lg:left-0 lg:right-0"
+              :style="getCardWrapperStyle(index)"
             >
               <div
-                class="bg-[#1D302C] rounded-[17px] p-6 sm:p-8 h-auto lg:h-[288px] shadow-xl lg:mb-0 mb-4"
+                class="bg-[#1D302C] rounded-[17px] p-6 sm:p-8 h-auto lg:h-[288px] shadow-xl lg:mb-0 mb-4 cursor-pointer"
+                :style="getCardContentStyle(index)"
+                @mouseenter="handleMouseEnter(index)"
               >
                 <div class="flex flex-col h-full justify-between">
                   <h3
@@ -32,7 +34,7 @@
                     class="flex flex-col lg:flex-row items-start lg:items-center justify-between"
                   >
                     <p
-                      class="text-white/80 text-[16px] sm:text-[18px] xl:text-[24px] leading-[140%] sm:leading-[150%] w-full lg:w-[70%] order-1 lg:order-1 mb-4 lg:mb-0"
+                      class="text-white/80 text-[16px] sm:text-[16px] xl:text-[20px] leading-[140%] sm:leading-[150%] w-full lg:w-[70%] order-1 lg:order-1 mb-4 lg:mb-0"
                     >
                       {{ card.description }}
                     </p>
@@ -44,7 +46,7 @@
                         <img
                           :src="card.imgSrc"
                           :alt="card.title"
-                          class="object-fit w-[80px] h-[80px] sm:w-[100px] sm:h-[100px] lg:w-[150px] lg:h-[150px]"
+                          class="object-fit w-[100px] h-[100px] sm:w-[110px] sm:h-[110px] lg:w-[150px] lg:h-[150px]"
                         />
                       </div>
                     </div>
@@ -52,6 +54,7 @@
                 </div>
               </div>
             </div>
+            
           </div>
         </div>
 
@@ -142,12 +145,13 @@
 
 <script setup>
 import { ref, onMounted, onUnmounted } from "vue";
-import shippingIcon from "/assets/icons/shipping.svg";
+import shippingIcon from "/assets/icons/shipping.svg"; 
 import procurementIcon from "/assets/icons/procurement.svg";
 import learningIcon from "/assets/icons/learning.svg";
 import cardShippingIcon from "/assets/icons/card-shipping.svg";
 
 const currentIndex = ref(0);
+const hoveredIndex = ref(-1);
 let intervalId = null;
 
 const isDesktop = ref(true);
@@ -162,6 +166,8 @@ onMounted(() => {
 
   window.addEventListener("resize", checkDesktop);
   checkDesktop();
+
+  startCycling();
 
   onUnmounted(() => {
     window.removeEventListener("resize", checkDesktop);
@@ -199,10 +205,10 @@ const startCycling = () => {
   if (!isDesktop.value) return;
   if (intervalId) return;
 
-  currentIndex.value = (currentIndex.value + 1) % cards.length;
-
   intervalId = setInterval(() => {
-    currentIndex.value = (currentIndex.value + 1) % cards.length;
+    if (hoveredIndex.value === -1) {
+      currentIndex.value = (currentIndex.value + 1) % cards.length;
+    }
   }, 3000);
 };
 
@@ -213,23 +219,88 @@ const stopCycling = () => {
   }
 };
 
-const getCardStyle = (index) => {
+const handleMouseEnter = (index) => {
+  stopCycling(); 
+  hoveredIndex.value = index;
+};
+
+const handleContainerLeave = () => {
+  hoveredIndex.value = -1;
+  startCycling();
+};
+
+
+const getCardWrapperStyle = (index) => {
   if (!isDesktop.value) {
-    return { transition: "none", transform: "none", zIndex: 1 };
+    return { transition: "none", transform: "none", zIndex: 1, pointerEvents: 'auto' };
   }
 
-  const mobileBaseOffset = 50;
-  const mobileScaleReduction = 0.03;
-
-  const adjustedIndex =
-    (index - currentIndex.value + cards.length) % cards.length;
-  const offset = adjustedIndex * mobileBaseOffset;
-  const scale = 1 - adjustedIndex * mobileScaleReduction;
-
+  const activeIndex = currentIndex.value;
+  const position = (index - activeIndex + cards.length) % cards.length;
+  
+  const baseOffset = 50;
+  const baseZIndex = cards.length - position;
+  
+  if (hoveredIndex.value !== -1) {
+    if (index === hoveredIndex.value) {
+      return {
+        transform: `translateY(0px)`,
+        zIndex: cards.length + 10,
+        transition: "all 0.4s cubic-bezier(0.4, 0, 0.2, 1)",
+        pointerEvents: 'auto',
+        display: 'block',
+      };
+    } else {
+      return {
+        transform: `translateY(0px)`,
+        zIndex: 0, 
+        transition: "none",
+        pointerEvents: 'none', 
+        display: 'none',
+      };
+    }
+  }
+  
   return {
-    transform: `translateY(${offset}px) scale(${scale})`,
-    zIndex: cards.length - adjustedIndex,
-    transition: "all 0.5s cubic-bezier(0.4, 0, 0.2, 1)",
+    transform: `translateY(${position * baseOffset}px)`,
+    zIndex: baseZIndex,
+    transition: "all 0.4s cubic-bezier(0.4, 0, 0.2, 1)",
+    pointerEvents: 'auto', 
+    display: 'block',
+  };
+};
+
+const getCardContentStyle = (index) => {
+  if (!isDesktop.value) {
+    return { transition: "none", transform: "none", opacity: 1 };
+  }
+
+  const activeIndex = currentIndex.value;
+  const position = (index - activeIndex + cards.length) % cards.length;
+  
+  const scaleReduction = 0.03;
+  const baseScale = 1 - position * scaleReduction;
+  
+  if (hoveredIndex.value !== -1) {
+    if (index === hoveredIndex.value) {
+      return {
+        transform: `scale(1.05)`,
+        opacity: 1,
+        transition: "all 0.4s cubic-bezier(0.4, 0, 0.2, 1)",
+      };
+    } else {
+      return {
+        transform: `scale(1)`,
+        opacity: 0, 
+        transition: "none", 
+      };
+    }
+  }
+  
+  return {
+    transform: `scale(${baseScale})`,
+    opacity: 1,
+    transition: "all 0.4s cubic-bezier(0.4, 0, 0.2, 1)",
   };
 };
 
