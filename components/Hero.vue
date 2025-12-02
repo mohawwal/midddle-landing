@@ -49,15 +49,19 @@
           </p>
 
           <button
-            class="hero-button text-lime-100 group w-[197px] h-[56px] bg-transparent text-lime/100 font-semibold rounded-[12px] flex items-center justify-center gap-4 text-sm sm:text-base"
+            class="hero-button text-lime-100 group w-[140px] h-[43px] sm:w-[197px] sm:h-[56px] bg-transparent text-lime/100 font-semibold rounded-[12px] flex items-center justify-center gap-4 text-sm sm:text-base"
           >
-            <p>Get Started</p>
-            <img src="/assets/icons/arrow-right.svg" alt="" />
+            <p class="sm:text-[16px] text-[13px]">Get Started</p>
+            <img
+              src="/assets/icons/arrow-right.svg"
+              alt=""
+              class="sm:w-6 w-4"
+            />
           </button>
         </div>
 
         <div
-          class="relative flex-1 flex items-end justify-center lg:justify-end mt-0 lg:mt-0 h-[550px] sm:h-[400px] lg:h-auto"
+          class="relative flex-1 flex items-end justify-center lg:justify-end mt-0 lg:mt-0 h-[330px] sm:h-[400px] lg:h-auto"
         >
           <img
             src="/assets/images/phone-mockup.svg"
