@@ -9,62 +9,37 @@
         >
           <div
             class="relative w-full max-w-2xl flex flex-col gap-4 lg:block lg:h-[500px] xl:h-[600px]"
-            @mouseenter="stopCycling"
-            @mouseleave="handleContainerLeave"
           >
-            <div
-              v-for="(card, index) in cards"
-              :key="index"
-              class="mx-auto w-full max-w-[648px] relative lg:absolute lg:left-0 lg:right-0 transition-all duration-700 ease-in-out"
-              :style="getCardWrapperStyle(index)"
-            >
+            <div class=" space-y-4 md:space-y-0 md:relative md:h-[600px]">
               <div
-                class="bg-[#1D302C] rounded-[17px] shadow-xl lg:mb-0 mb-4 cursor-pointer h-auto lg:h-[288px] w-full"
-                :class="
-                  getCardPosition(index) === 0 || !isDesktop
-                    ? 'p-4 sm:p-6'
-                    : 'h-full'
-                "
-                @mouseenter="handleMouseEnter(index)"
-                :style="getCardContentStyle(index)"
+                v-for="feature in features"
+                :key="feature.id"
+                class="bg-[#1D302C] rounded-[22px] md:rounded-[28px] p-6 md:p-10 transition-all duration-500 cursor-pointer flex flex-col md:flex-row gap-6 md:gap-0 justify-between items-start md:items-center group shadow-[0_8px_24px_rgba(0,0,0,0.35)] md:absolute md:inset-x-0 md:mx-auto md:h-[290px] hover:-translate-y-4 md:hover:-translate-y-16 hover:scale-[1.02] md:hover:scale-105 hover:z-[999] hover:shadow-[0_20px_60px_rgba(0,0,0,0.5)]"
+                :class="[
+                  feature.widthClass,
+                  feature.shadowClass,
+                  feature.zIndexClass,
+                ]"
+                :style="{ bottom: feature.bottom }"
               >
-                <div
-                  v-if="getCardPosition(index) === 0 || !isDesktop"
-                  class="flex flex-col h-full justify-between transition-opacity duration-300"
-                  :key="isDesktop ? displayedCardIndex : index"
-                >
+                <div class="max-w-md">
                   <h3
-                    class="text-[22px] sm:text-[28px] font-semibold text-[#CDFF64] mb-3 sm:mb-4 leading-tight"
+                    class="text-xl md:text-[26px] font-bold text-[#C3FF4C] tracking-tight"
                   >
-                    {{ isDesktop ? activeCardData.title : card.title }}
+                    {{ feature.title }}
                   </h3>
-
-                  <div
-                    class="flex flex-col lg:flex-row items-start lg:items-center justify-between"
+                  <p
+                    class="mt-3 md:mt-4 text-white/80 leading-relaxed text-sm md:text-[17px]"
                   >
-                    <p
-                      class="text-white/80 text-[16px] sm:text-[16px] xl:text-[20px] leading-[140%] sm:leading-[150%] w-full lg:w-[70%] order-1 lg:order-1 mb-4 lg:mb-0"
-                    >
-                      {{
-                        isDesktop
-                          ? activeCardData.description
-                          : card.description
-                      }}
-                    </p>
-
-                    <div
-                      class="flex-shrink-0 w-full flex justify-end lg:w-[170px] lg:h-[170px] mt-1 lg:mt-0 order-2 lg:order-2"
-                    >
-                      <div class="flex items-center justify-end w-full h-full">
-                        <img
-                          :src="isDesktop ? activeCardData.imgSrc : card.imgSrc"
-                          :alt="isDesktop ? activeCardData.title : card.title"
-                          class="object-fit w-[100px] h-[100px] sm:w-[110px] sm:h-[110px] lg:w-[150px] lg:h-[150px]"
-                        />
-                      </div>
-                    </div>
-                  </div>
+                    {{ feature.description }}
+                  </p>
                 </div>
+
+                <img
+                  :src="feature.image"
+                  :alt="feature.title"
+                  class="w-20 h-20 md:w-32 md:h-32 opacity-90 transform group-hover:scale-110 transition duration-500 self-end md:self-auto"
+                />
               </div>
             </div>
           </div>
@@ -156,146 +131,57 @@
 </template>
 
 <script setup>
-import { ref, onMounted, onUnmounted, computed } from "vue";
 import shippingIcon from "/assets/icons/shipping.svg";
 import procurementIcon from "/assets/icons/procurement.svg";
 import learningIcon from "/assets/icons/learning.svg";
 import cardShippingIcon from "/assets/icons/card-shipping.svg";
 
-const currentIndex = ref(0);
-const displayedCardIndex = ref(0);
-let intervalId = null;
-
-const isDesktop = ref(true);
-
-onMounted(() => {
-  const checkDesktop = () => {
-    isDesktop.value = window.innerWidth >= 1024;
-    if (!isDesktop.value) {
-      stopCycling();
-    }
-  };
-
-  window.addEventListener("resize", checkDesktop);
-  checkDesktop();
-
-  startCycling();
-
-  onUnmounted(() => {
-    window.removeEventListener("resize", checkDesktop);
-  });
-});
-
-const cards = [
+const features = [
   {
-    title: "Link Translation",
+    id: "procurement-workflows ",
+    title: "Procurement Workflows ",
     description:
-      "Instantly translate any Chinese product page into dean, readable English - Including: specs, variations, and seller notes",
-    imgSrc: shippingIcon,
+      "Manage RFQs, approvals, updates, and logistics — everything in one seamless workflow.",
+    image: procurementIcon,
+    widthClass: "w-full md:w-[82%]",
+    bottom: "180px",
+    zIndexClass: "z-10",
+    shadowClass: "shadow-[0_8px_28px_rgba(0,0,0,0.30)]",
   },
   {
+    id: "product-intelligence",
     title: "Product Intelligence",
     description:
-      "Ask anything about a product -from specifications pricing and material quality to procurement options and shipping costs.",
-    imgSrc: cardShippingIcon,
+      "Ask anything about a product — from specs and pricing to procurement guidance and shipping estimates.",
+    image: cardShippingIcon,
+    widthClass: "w-full md:w-[75%]",
+    bottom: "140px",
+    zIndexClass: "z-0",
+    shadowClass: "shadow-[0_8px_30px_rgba(0,0,0,0.35)]",
   },
   {
+    id: "product-sourcing",
     title: "Product Sourcing",
     description:
-      "Al-powered engine that finds reliable suppliers, compares listings, and surfaces the best options instantly.",
-    imgSrc: learningIcon,
+      "AI compares suppliers and surfaces the most reliable, best-priced sourcing options instantly.",
+    image: learningIcon,
+    widthClass: "w-full md:w-[88%]",
+    bottom: "220px",
+    zIndexClass: "z-10",
+    shadowClass: "shadow-[0_8px_25px_rgba(0,0,0,0.26)]",
   },
   {
-    title: "Procurement Work Flow",
+    id: "link-translation",
+    title: "Link Translation",
     description:
-      "From RFQ to shipping manage approvals updates and tracking in one place",
-    imgSrc: procurementIcon,
+      "Instantly translate any Chinese product page into clean, readable English — including specs and variations.",
+    image: shippingIcon,
+    widthClass: "w-full md:w-[94%]",
+    bottom: "270px",
+    zIndexClass: "z-10",
+    shadowClass: "shadow-[0_8px_25px_rgba(0,0,0,0.25)]",
   },
 ];
-
-const activeCardData = computed(() => {
-  return (
-    cards.find((_, index) => index === displayedCardIndex.value) || cards[0]
-  );
-});
-
-const startCycling = () => {
-  if (!isDesktop.value) return;
-  if (intervalId) return;
-
-  intervalId = setInterval(() => {
-    currentIndex.value = (currentIndex.value + 1) % cards.length;
-    displayedCardIndex.value = currentIndex.value;
-  }, 3000);
-};
-
-const stopCycling = () => {
-  if (intervalId) {
-    clearInterval(intervalId);
-    intervalId = null;
-  }
-};
-
-const handleMouseEnter = (index) => {
-  displayedCardIndex.value = index;
-};
-
-const handleContainerLeave = () => {
-  displayedCardIndex.value = currentIndex.value;
-  startCycling();
-};
-
-const getCardPosition = (index) => {
-  return (index - currentIndex.value + cards.length) % cards.length;
-};
-
-const getCardWrapperStyle = (index) => {
-  if (!isDesktop.value) {
-    return {
-      opacity: 1,
-      position: "relative",
-      transform: "none",
-      transition: "none",
-    };
-  }
-
-  const position = getCardPosition(index);
-
-  const baseOffset = 50;
-  const baseZIndex = cards.length - position;
-
-  return {
-    transform: `translateY(${position * baseOffset}px)`,
-    zIndex: baseZIndex,
-    pointerEvents: "auto",
-    display: "block",
-  };
-};
-
-const getCardContentStyle = (index) => {
-  if (!isDesktop.value) {
-    return {};
-  }
-
-  const position = getCardPosition(index);
-
-  const scaleReduction = 0.03;
-  let scale = 1 - position * scaleReduction;
-
-  if (position === 0) {
-    scale = 1;
-  }
-
-  return {
-    transform: `scale(${scale})`,
-    opacity: 1,
-    transition: "all 0.4s cubic-bezier(0.4, 0, 0.2, 1)",
-  };
-};
-
-onUnmounted(() => {
-  stopCycling();
-});
 </script>
 
 <style scoped>
