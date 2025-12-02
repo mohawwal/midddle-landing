@@ -20,7 +20,7 @@
             >
               <div
                 class="bg-[#1D302C] rounded-[17px] shadow-xl lg:mb-0 mb-4 cursor-pointer h-auto lg:h-[288px] w-full"
-                :class="getCardPosition(index) === 0 || !isDesktop ? 'p-6 sm:p-8' : 'h-full'"
+                :class="getCardPosition(index) === 0 || !isDesktop ? 'p-4 sm:p-6' : 'h-full'"
                 @mouseenter="handleMouseEnter(index)"
                 :style="getCardContentStyle(index)"
               >
@@ -91,10 +91,10 @@
             <img
               src="/assets/icons/flash.svg"
               alt=""
-              class="w-4 h-4 lg:w-6 lg:h-6"
+              class="w-3 h-3 lg:w-5 lg:h-5"
             />
             <p
-              class="text-[14px] leading-[20px] lg:text-[24px] lg:leading-[36px] tracking-[4%]"
+              class="text-[14px] leading-[18px] lg:text-[24px] lg:leading-[36px] tracking-[4%]"
             >
               AI-powered Source
             </p>
@@ -103,10 +103,10 @@
             <img
               src="/assets/icons/link.svg"
               alt=""
-              class="w-4 h-4 lg:w-6 lg:h-6"
+              class="w-3 h-3 lg:w-5 lg:h-5"
             />
             <p
-              class="text-[14px] leading-[20px] lg:text-[24px] lg:leading-[36px] tracking-[4%]"
+              class="text-[14px] leading-[18px] lg:text-[24px] lg:leading-[36px] tracking-[4%]"
             >
               Product Link Translation</p>
           </div>
@@ -121,10 +121,10 @@
             <img
               src="/assets/icons/ai-start.svg"
               alt="AI Icon"
-              class="w-6 h-6 sm:w-auto sm:h-auto"
+              class="w-5 h-5 sm:w-auto sm:h-auto"
             />
             <p
-              class="text-white text-[16px] sm:text-[24px] leading-[1.3] font-normal tracking-[0%] sm:tracking-[4%]"
+              class="text-white text-[14px] sm:text-[20px] leading-[1.3] font-normal tracking-[0%] sm:tracking-[4%]"
             >
               AI assistance for China Import
             </p>
@@ -133,10 +133,10 @@
             <img
               src="/assets/icons/midddleman-mini-icon.svg"
               alt="Middleman Icon"
-              class="w-6 h-6 sm:w-auto sm:h-auto"
+              class="w-5 h-5 sm:w-auto sm:h-auto"
             />
             <p
-              class="text-white text-[16px] sm:text-[24px] leading-[1.3] font-normal tracking-[0%] sm:tracking-[4%]"
+              class="text-white text-[14px] sm:text-[20px] leading-[1.3] font-normal tracking-[0%] sm:tracking-[4%]"
             >
               2025 Midddleman AI. All Right Reserved
             </p>
