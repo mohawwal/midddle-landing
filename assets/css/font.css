@@ -1,0 +1,61 @@
+@font-face {
+  font-family: "Futuru";
+  src: url("/fonts/Futuru-Black-iF66d197b0dbd22.otf") format("opentype");
+  font-weight: 900;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Futuru";
+  src: url("/fonts/Futuru-Bold-iF66d197b0e43bd.otf") format("opentype");
+  font-weight: 700;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Futuru";
+  src: url("/fonts/Futuru-Extrabold-iF66d197b0ee8c9.otf") format("opentype");
+  font-weight: 800;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Futuru";
+  src: url("/fonts/Futuru-Extralight-iF66d197b11c68f.otf") format("opentype");
+  font-weight: 200;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Futuru";
+  src: url("/fonts/Futuru-Light-iF66d197b129ae0.otf") format("opentype");
+  font-weight: 300;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Futuru";
+  src: url("/fonts/Futuru-Medium-iF66d197b1052bd.otf") format("opentype");
+  font-weight: 500;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Futuru";
+  src: url("/fonts/Futuru-Regular-iF66d197b135b45.otf") format("opentype");
+  font-weight: 400;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Futuru";
+  src: url("/fonts/Futuru-Semibold-iF66d197b110774.otf") format("opentype");
+  font-weight: 600;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Futuru";
+  src: url("/fonts/Futuru-Thin-iF66d197b140949.otf") format("opentype");
+  font-weight: 100;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Nova Klasse";
+  src: url("/fonts/novaklasse-semibold.woff") format("woff");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
