@@ -12,12 +12,13 @@
         </div>
 
         <button
-          class="bg-lime-100 text-black-100 font-medium rounded-[12px] 
-                 transition-all duration-300
-                 h-[36px] w-[100px] text-sm
-                 sm:h-[48px] sm:w-[149px] sm:text-base"
+          class="bg-lime-100 text-black-100 font-medium rounded-[12px]
+                 h-[36px] w-[100px] text-[14px]
+                 sm:h-[48px] sm:w-[149px] sm:text-[16px] flex items-center justify-center"
         >
-          Get Started
+          <p>
+            Get Started
+          </p>
         </button>
 
       </div>

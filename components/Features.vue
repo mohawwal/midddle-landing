@@ -20,14 +20,18 @@
             >
               <div
                 class="bg-[#1D302C] rounded-[17px] shadow-xl lg:mb-0 mb-4 cursor-pointer h-auto lg:h-[288px] w-full"
-                :class="getCardPosition(index) === 0 || !isDesktop ? 'p-4 sm:p-6' : 'h-full'"
+                :class="
+                  getCardPosition(index) === 0 || !isDesktop
+                    ? 'p-4 sm:p-6'
+                    : 'h-full'
+                "
                 @mouseenter="handleMouseEnter(index)"
                 :style="getCardContentStyle(index)"
               >
-                <div 
-                  v-if="getCardPosition(index) === 0 || !isDesktop" 
+                <div
+                  v-if="getCardPosition(index) === 0 || !isDesktop"
                   class="flex flex-col h-full justify-between transition-opacity duration-300"
-                  :key="isDesktop ? displayedCardIndex : index" 
+                  :key="isDesktop ? displayedCardIndex : index"
                 >
                   <h3
                     class="text-[22px] sm:text-[28px] font-semibold text-[#CDFF64] mb-3 sm:mb-4 leading-tight"
@@ -41,7 +45,11 @@
                     <p
                       class="text-white/80 text-[16px] sm:text-[16px] xl:text-[20px] leading-[140%] sm:leading-[150%] w-full lg:w-[70%] order-1 lg:order-1 mb-4 lg:mb-0"
                     >
-                      {{ isDesktop ? activeCardData.description : card.description }}
+                      {{
+                        isDesktop
+                          ? activeCardData.description
+                          : card.description
+                      }}
                     </p>
 
                     <div
@@ -59,7 +67,6 @@
                 </div>
               </div>
             </div>
-            
           </div>
         </div>
 
@@ -108,7 +115,8 @@
             <p
               class="text-[14px] leading-[18px] lg:text-[24px] lg:leading-[36px] tracking-[4%]"
             >
-              Product Link Translation</p>
+              Product Link Translation
+            </p>
           </div>
         </div>
       </div>
@@ -149,7 +157,7 @@
 
 <script setup>
 import { ref, onMounted, onUnmounted, computed } from "vue";
-import shippingIcon from "/assets/icons/shipping.svg"; 
+import shippingIcon from "/assets/icons/shipping.svg";
 import procurementIcon from "/assets/icons/procurement.svg";
 import learningIcon from "/assets/icons/learning.svg";
 import cardShippingIcon from "/assets/icons/card-shipping.svg";
@@ -183,32 +191,33 @@ const cards = [
     title: "Link Translation",
     description:
       "Instantly translate any Chinese product page into dean, readable English - Including: specs, variations, and seller notes",
-    imgSrc: shippingIcon
+    imgSrc: shippingIcon,
   },
   {
     title: "Product Intelligence",
     description:
       "Ask anything about a product -from specifications pricing and material quality to procurement options and shipping costs.",
-    imgSrc: cardShippingIcon
+    imgSrc: cardShippingIcon,
   },
   {
     title: "Product Sourcing",
     description:
       "Al-powered engine that finds reliable suppliers, compares listings, and surfaces the best options instantly.",
-    imgSrc: learningIcon
+    imgSrc: learningIcon,
   },
   {
     title: "Procurement Work Flow",
     description:
       "From RFQ to shipping manage approvals updates and tracking in one place",
-    imgSrc: procurementIcon
+    imgSrc: procurementIcon,
   },
 ];
 
 const activeCardData = computed(() => {
-    return cards.find((_, index) => index === displayedCardIndex.value) || cards[0];
+  return (
+    cards.find((_, index) => index === displayedCardIndex.value) || cards[0]
+  );
 });
-
 
 const startCycling = () => {
   if (!isDesktop.value) return;
@@ -216,7 +225,7 @@ const startCycling = () => {
 
   intervalId = setInterval(() => {
     currentIndex.value = (currentIndex.value + 1) % cards.length;
-    displayedCardIndex.value = currentIndex.value; 
+    displayedCardIndex.value = currentIndex.value;
   }, 3000);
 };
 
@@ -232,32 +241,36 @@ const handleMouseEnter = (index) => {
 };
 
 const handleContainerLeave = () => {
-  displayedCardIndex.value = currentIndex.value; 
+  displayedCardIndex.value = currentIndex.value;
   startCycling();
 };
 
 const getCardPosition = (index) => {
-    return (index - currentIndex.value + cards.length) % cards.length;
+  return (index - currentIndex.value + cards.length) % cards.length;
 };
 
 const getCardWrapperStyle = (index) => {
   if (!isDesktop.value) {
-    return { opacity: 1, position: 'relative', transform: 'none', transition: 'none' };
+    return {
+      opacity: 1,
+      position: "relative",
+      transform: "none",
+      transition: "none",
+    };
   }
 
   const position = getCardPosition(index);
-  
+
   const baseOffset = 50;
   const baseZIndex = cards.length - position;
-  
+
   return {
     transform: `translateY(${position * baseOffset}px)`,
     zIndex: baseZIndex,
-    pointerEvents: 'auto', 
-    display: 'block',
+    pointerEvents: "auto",
+    display: "block",
   };
 };
-
 
 const getCardContentStyle = (index) => {
   if (!isDesktop.value) {
@@ -265,10 +278,10 @@ const getCardContentStyle = (index) => {
   }
 
   const position = getCardPosition(index);
-  
+
   const scaleReduction = 0.03;
   let scale = 1 - position * scaleReduction;
-  
+
   if (position === 0) {
     scale = 1;
   }

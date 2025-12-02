@@ -49,7 +49,7 @@
           </p>
 
           <button
-            class="hero-button text-lime-100 group w-[197px] h-[56px] bg-transparent text-lime/100 font-semibold rounded-lg flex items-center justify-center gap-4 text-sm sm:text-base"
+            class="hero-button text-lime-100 group w-[197px] h-[56px] bg-transparent text-lime/100 font-semibold rounded-[12px] flex items-center justify-center gap-4 text-sm sm:text-base"
           >
             <p>Get Started</p>
             <img src="/assets/icons/arrow-right.svg" alt="" />
@@ -57,7 +57,7 @@
         </div>
 
         <div
-          class="relative flex-1 flex items-end justify-center lg:justify-end mt-0 lg:mt-0 h-[300px] sm:h-[400px] lg:h-auto"
+          class="relative flex-1 flex items-end justify-center lg:justify-end mt-0 lg:mt-0 h-[550px] sm:h-[400px] lg:h-auto"
         >
           <img
             src="/assets/images/phone-mockup.svg"
@@ -94,7 +94,7 @@
   content: "";
   position: absolute;
   inset: 0;
-  border-radius: 0.5rem;
+  border-radius: 12px;
   padding: 1px;
   pointer-events: none;
 
