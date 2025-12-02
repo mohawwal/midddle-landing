@@ -9,7 +9,7 @@
     />
 
     <div
-      class="relative z-10 w-full h-full max-w-[2000px] mx-auto px-1 sm:px-[1rem] md:px-[3.5rem]"
+      class="relative z-10 w-full h-full max-w-[2000px] mx-auto px-2 sm:px-[1rem] md:px-[3.5rem]"
     >
       <div
         class="h-full flex flex-col lg:flex-row lg:items-start lg:justify-between pt-24 sm:pt-28 lg:pt-32 pb-8 sm:pb-12 lg:pb-0"
