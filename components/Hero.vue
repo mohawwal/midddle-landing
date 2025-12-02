@@ -6,7 +6,7 @@
       class="absolute bottom-0 left-1/2 -translate-x-1/2 w-[2000px] h-auto object-contain z-0 pointer-events-none"
     />
 
-    <div class="relative z-10 w-full h-full max-w-[2000px] mx-auto px-3 sm:px-[3.5rem]">
+    <div class="relative z-10 w-full h-full max-w-[2000px] mx-auto px-1 sm:px-[1rem] md:px-[3.5rem]">
       <div class="h-full flex flex-col lg:flex-row lg:items-start lg:justify-between pt-24 sm:pt-28 lg:pt-32 pb-8 sm:pb-12 lg:pb-0">
         
         <div class="space-y-4 sm:space-y-8 lg:max-w-[600px] xl:max-w-[750px] flex-shrink-0 pl-3 pt-4">
